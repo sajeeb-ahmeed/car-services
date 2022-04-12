@@ -8,9 +8,10 @@ import banner3 from '../../../images/banner/banner3.jpg';
 const Banner = () => {
     const [index, setIndex] = useState(0);
 
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
+
     return (
         <Carousel activeIndex={index} onSelect={handleSelect}>
             <Carousel.Item>
