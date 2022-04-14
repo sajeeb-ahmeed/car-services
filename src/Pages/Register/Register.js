@@ -19,14 +19,19 @@ const Register = () => {
     const navigateLogin = event => {
         navigate('/login')
     }
+
     const handleRegister = event => {
         event.preventDefault()
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
         createUserWithEmailAndPassword(email, password);
-        console.log(createUserWithEmailAndPassword());
+
     }
+    if (user) {
+        navigate('/login')
+    }
+
     return (
         <div className='mx-auto container row' >
             <h2 className='text-center my-4'> Register Now </h2>

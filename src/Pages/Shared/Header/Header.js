@@ -1,9 +1,21 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../../firebase.init';
 import logo from '../../../images/logo.png'
+import userlogo from '../../../images/user1.png'
+import { FaUserCircle } from 'react-icons/fa'
+import { RiLoginCircleLine } from 'react-icons/ri'
+import { FiLogOut } from 'react-icons/fi'
 
 const Header = () => {
+    const [user] = useAuthState(auth);
+
+    const logout = () => {
+        signOut(auth);
+    };
     return (
         <Navbar collapseOnSelect expand="lg" sticky='top' bg="dark" variant="dark">
             <Container>
@@ -18,9 +30,15 @@ const Header = () => {
 
                     <Nav>
                         <Nav.Link as={Link} to="/about">About</Nav.Link>
-                        <Nav.Link eventKey={2} as={Link} to="/login">
-                            Login
-                        </Nav.Link>
+                        {
+                            user ? <Nav.Link onClick={logout}>
+                                <FiLogOut className='mx-1'></FiLogOut>
+                                Logout  <img className='ms-1 rounded-circle' height={30} src={userlogo} alt="" />
+                            </Nav.Link> :
+                                <Nav.Link as={Link} to="/login">
+                                    Login <RiLoginCircleLine></RiLoginCircleLine>
+                                </Nav.Link>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Container>
